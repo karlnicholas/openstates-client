@@ -1,5 +1,22 @@
 package org.openstates.data;
 
+/**
+ * Holds District details.
+ * 
+ * <pre>
+ * abbr, 
+ * boundary_id, 
+ * chamber, 
+ * id, 
+ * name, 
+ * num_seats, 
+ * legislators, 
+ * bbox, 
+ * region, 
+ * shape.
+ * </pre> 
+ *
+ */
 public class District extends Districts.Dist {
 	public Float[][] bbox;
 	public Region region;

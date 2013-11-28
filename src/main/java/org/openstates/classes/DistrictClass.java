@@ -6,6 +6,18 @@ import org.openstates.api.OpenStatesException;
 import org.openstates.data.District;
 import org.openstates.data.Districts;
 
+/**
+ * Accesses the <a href="http://sunlightlabs.github.io/openstates-api/districts.html">Districts</a> methods of the OpenStates.api
+ *  
+ *  <pre>
+ *  Open States makes it possible to get a listing of all districts or retrieve the boundary of a given district.
+ *  There are two methods available for district data:
+ *  Method                      Description
+ *  District Search             List districts for state (and optionally filtered by chamber).
+ *  District Boundary Lookup    Get geographic boundary for a district.
+ *  </pre>
+ *
+ */
 public class DistrictClass extends ClassesBase {
 
 	/**

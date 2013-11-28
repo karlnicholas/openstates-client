@@ -1,9 +1,10 @@
 package examples;
 
-import org.openstates.classes.MetadataClass;
-import org.openstates.data.MetadataOverview;
+import org.openstates.classes.BillClass;
 
 /**
+ * This program is a simple demonstration of errors.
+ * 
  * <pre>
  * This program is a very simple demonstration of this RESTful Client API.
  * It requires a ResourceBundle named OpenStates. This means a file
@@ -22,20 +23,14 @@ import org.openstates.data.MetadataOverview;
  * </pre>
  *
  */
-public class Example {
+public class ExampleError {
 	
 	public static void main(String... args) throws Exception {
-		// create a class to query
-		MetadataClass metadataClass = new MetadataClass();
-		
-		// if you want to turn caching off, uncomment this line
-//		OpenStates.setCache(false);
-		
-		// Metadata overview ... for all states
-		MetadataOverview overview = metadataClass.overview();
-		
-		// print the abbreviation for the first state 
-		System.out.println("The abbreviation for " + overview.get(0).name + " is " + overview.get(0).abbreviation);
+		//Bill class
+		BillClass billClass = new BillClass();
+
+		// try to get a bad id
+		billClass.detail("tx", "833", "bad id");
 	}
 
 }

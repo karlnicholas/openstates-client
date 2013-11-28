@@ -3,6 +3,10 @@ package org.openstates.data;
 import java.util.ArrayList;
 import java.util.List;
 
+/**
+ * Holds a list of {@link District} details.
+ *
+ */
 public class Districts extends ArrayList<Districts.Dist> {
 	private static final long serialVersionUID = -6445878527185827758L;
 

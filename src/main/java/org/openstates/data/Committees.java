@@ -3,6 +3,10 @@ package org.openstates.data;
 import java.util.ArrayList;
 import java.util.Date;
 
+/**
+ * Holds a list of {@link Committee} details.
+ *
+ */
 public class Committees extends ArrayList<Committees.Cmte> {
 	private static final long serialVersionUID = -3782946454018623648L;
 	public static class Cmte {

@@ -4,6 +4,48 @@ import java.util.Date;
 import java.util.List;
 import java.util.Map;
 
+/**
+ * Holds Legislator details.
+ * 
+ * <pre>
+ * id, 
+ * leg_id, 
+ * country, 
+ * level, 
+ * transparencydata_id, 
+ * csrfmiddlewaretoken, 
+ * nimsp_id, 
+ * full_name, 
+ * first_name, 
+ * middle_name, 
+ * last_name, 
+ * suffixes, 
+ * nickname, 
+ * active, 
+ * created_at, 
+ * updated_at, 
+ * roles, 
+ * old_roles, 
+ * offices, 
+ * sources, 
+ * votesmart_id, 
+ * nimsp_candidate_id, 
+ * state, 
+ * district, 
+ * chamber, 
+ * party, 
+ * photo_url, 
+ * office_phone, 
+ * office_address, 
+ * email, 
+ * url, 
+ * suffix, 
+ * notice, 
+ * all_ids, 
+ * occupation.
+ * </pre>
+ *
+ */
 public class Legislator {
 	public String id;
 	public String leg_id;

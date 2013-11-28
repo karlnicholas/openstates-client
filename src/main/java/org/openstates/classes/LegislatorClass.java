@@ -7,6 +7,18 @@ import org.openstates.api.OpenStatesException;
 import org.openstates.data.Legislator;
 import org.openstates.data.Legislators;
 
+/**
+ * Accesses the <a href="http://sunlightlabs.github.io/openstates-api/legislators.html">Legislators</a> methods.
+ * 
+ * <pre>
+ * There are three methods available for access to legislator information:
+ * Method                Description
+ * Legislator Search     Search legislators by their attributes.
+ * Legislator Detail     Get full detail for a legislator, including all roles.
+ * Geo Lookup            Lookup all legislators that serve districts containing a given point.
+ * </pre>
+ *
+ */
 public class LegislatorClass extends ClassesBase {
 
 	/**
@@ -26,8 +38,10 @@ public class LegislatorClass extends ClassesBase {
 	}
 
 	/**
-	 * @param state Filter by state.
+	 * Get Legislators by State. 
 	 * 
+	 * @param state Filter by state.
+	 * @return {@link Legislators}
 	 */
 	public Legislators searchByState(
 			String state 
@@ -40,9 +54,11 @@ public class LegislatorClass extends ClassesBase {
 	}
 	
 	/**
+	 * Get Legislators by State and Active filters.
+	 * 
 	 * @param state Filter by state.
 	 * @param active 'true' (default) to only include current legislators, 'false' will include all legislators
-	 * 
+	 * @return {@link Legislators}
 	 */
 	public Legislators searchByStateActive(
 			String state, 
@@ -60,9 +76,11 @@ public class LegislatorClass extends ClassesBase {
 	
 
 	/**
+	 * Search for Legislators by State and Term.
+	 * 
 	 * @param state Filter by state.
 	 * @param term Only legislators that have a role in a certain term.
-	 * 
+	 * @return {@link Legislators}
 	 */
 	public Legislators searchByStateTerm(
 			String state, 
@@ -79,6 +97,8 @@ public class LegislatorClass extends ClassesBase {
 	}
 	
 	/**
+	 * This method allows looking up a legislator by a number of parameters, the results do not include the roles or old_roles items by default.
+	 * 
 	 * Pass null for parameters that are not being filtered.
 	 * 
 	 * @param state Filter by state.
@@ -121,6 +141,12 @@ public class LegislatorClass extends ClassesBase {
 		return api.query(new MethodMap("legislators"), new ArgMap("long", longitude, "lat", latitude), Legislators.class);
 	}
 
+	/**
+	 * This method returns the full detail for a legislator.
+	 * 
+	 * @param id
+	 * @return {@link Legislator}
+	 */
 	public Legislator detail(String id) throws OpenStatesException {
 		return api.query(new MethodMap("legislators", id), null, Legislator.class);
 	}

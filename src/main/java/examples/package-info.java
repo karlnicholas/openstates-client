@@ -1,8 +1,0 @@
-/**
- * 
- */
-/**
- * @author karl
- *
- */
-package examples;

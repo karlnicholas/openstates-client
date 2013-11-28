@@ -3,6 +3,28 @@ package org.openstates.data;
 import java.util.Date;
 import java.util.List;
 
+/**
+ * Holds Event details.
+ * 
+ * <pre>
+ * id, 
+ * created_at, 
+ * updated_at, 
+ * description, 
+ * when, 
+ * end, 
+ * location, 
+ * type, 
+ * state, 
+ * session, 
+ * participants, 
+ * sources, 
+ * documents, 
+ * related_bills, 
+ * timezone.
+ * </pre>
+ *
+ */
 public final class Event {
 	public String id;
 	public Date created_at;

@@ -7,6 +7,16 @@ import org.openstates.api.OpenStatesException;
 import org.openstates.data.Committee;
 import org.openstates.data.Committees;
 
+/**
+ * This class accesses the <a href="http://sunlightlabs.github.io/openstates-api/committees.html">Committees</a> methods of the OpenStates API.
+ * 
+ *  <pre>
+ *  There are two methods available for committee data:
+ *  Method	              Description
+ *  Committee Search      Search committees by any of their attributes.
+ *  Committee Detail      Get full detail for committee, including all members.
+ * </pre>
+ */
 public class CommitteeClass extends ClassesBase {
 
 	/**
@@ -42,14 +52,14 @@ public class CommitteeClass extends ClassesBase {
 	
 	/**
 	 * Committee Search
-	 * This method allows searching by a number of fields:
+	 * This method allows searching by state and chamber.
 	 * Committee objects returned by this method do not include the list of members by default.
 	 * 
 	 * @param state
 	 * @param chamber
 	 * @return {@link Committees} 
 	 */
-	public Committees search(String state, String chamber) throws OpenStatesException {
+	public Committees searchByStateChamber(String state, String chamber) throws OpenStatesException {
 		return api.query(
 			new MethodMap("committees"), 
 			new ArgMap("state", state, "chamber", chamber), 

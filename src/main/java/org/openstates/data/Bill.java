@@ -3,6 +3,35 @@ package org.openstates.data;
 import java.util.Date;
 import java.util.List;
 
+/**
+ * Holds all of the detail of a specific bill.
+ * 
+ * <pre>
+ * chamber, 
+ * bill_id, 
+ * title, 
+ * type, 
+ * alternate_titles, 
+ * alternate_bill_ids, 
+ * created_at, 
+ * updated_at, 
+ * versions, 
+ * documents, 
+ * sponsors, 
+ * actions, 
+ * votes, 
+ * sources, 
+ * id, 
+ * companions, 
+ * state, 
+ * subjects, 
+ * action_dates, 
+ * level, 
+ * country, 
+ * scraped_subjects, 
+ * summary.
+ * </pre>
+ */
 public class Bill {	
 
 	public String session;

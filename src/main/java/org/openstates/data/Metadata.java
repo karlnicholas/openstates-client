@@ -4,6 +4,35 @@ import java.util.Date;
 import java.util.List;
 import java.util.Map;
 
+/**
+ * Holds Metadata details.
+ * 
+ * <pre>
+ * abbreviation, 
+ * capitol_timezone, 
+ * capitol_maps, 
+ * chambers, 
+ * feature_flags, 
+ * id, 
+ * latest_update, 
+ * latest_csv_date, 
+ * latest_csv_url, 
+ * latest_json_date, 
+ * latest_json_url, 
+ * legislature_name, 
+ * legislature_url, 
+ * name, 
+ * session_details, 
+ * terms, 
+ * lower_chamber_name, 
+ * lower_chamber_title, 
+ * lower_chamber_term, 
+ * upper_chamber_name, 
+ * upper_chamber_title, 
+ * upper_chamber_term.
+ * </pre>
+ *
+ */
 public class Metadata {
 	public String abbreviation;
 	public String capitol_timezone;

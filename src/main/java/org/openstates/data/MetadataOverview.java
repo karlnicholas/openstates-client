@@ -4,6 +4,23 @@ import java.util.ArrayList;
 import java.util.List;
 import java.util.Map;
 
+/**
+ * Holds Metadata Overview Details.
+ * 
+ * <pre>
+ * lower_chamber_name, 
+ * lower_chamber_title, 
+ * lower_chamber_term, 
+ * upper_chamber_name, 
+ * upper_chamber_title, 
+ * upper_chamber_term, 
+ * name, 
+ * abbreviation, 
+ * feature_flags, 
+ * chambers.
+ * </pre> 
+ *
+ */
 public class MetadataOverview extends ArrayList<MetadataOverview.Data> {
 	private static final long serialVersionUID = 3508588106112659421L;
 

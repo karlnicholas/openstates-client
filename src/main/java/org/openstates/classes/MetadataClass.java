@@ -6,6 +6,16 @@ import org.openstates.api.OpenStatesException;
 import org.openstates.data.Metadata;
 import org.openstates.data.MetadataOverview;
 
+/**
+ * Accesses the State <a href="http://sunlightlabs.github.io/openstates-api/metadata.html">Metadata</a> methods.
+ * 
+ * <pre>
+ * There are two methods available for access to general metadata:
+ * Method                Description
+ * Metadata Overview     Get list of all states with data available and basic metadata about their status.
+ * State Metadata        Get detailed metadata for a particular state.
+ * </pre>
+ */
 public class MetadataClass extends ClassesBase {
 
 	/**

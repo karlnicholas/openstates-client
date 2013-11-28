@@ -7,6 +7,19 @@ import org.openstates.api.OpenStatesException;
 import org.openstates.data.Event;
 import org.openstates.data.Events;
 
+/**
+ * Accesses the <a href="http://sunlightlabs.github.io/openstates-api/events.html">Events</a> methods.
+ * 
+ * <pre>
+ * Events are not available in all states, to ensure that events are available check the feature_flags list in a states' metadata.
+ * 
+ * There are two methods available for event data:
+ * Method        Description
+ * Event Search  Search events by state and type.
+ * Event Detail  Get full detail for event.
+ * </pre>
+ * 
+ */
 public class EventClass extends ClassesBase {
 
 	/**

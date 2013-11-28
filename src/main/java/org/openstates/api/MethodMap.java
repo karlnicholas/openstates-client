@@ -3,8 +3,7 @@ package org.openstates.api;
 import java.util.ArrayList;
 
 /**
- * You can either add arguments in pairs in the constructor or you
- * can add them manually after you construct an empty map.
+ * Not for user consumption.
  * 
  */
 public class MethodMap extends ArrayList<String> {

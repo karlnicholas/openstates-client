@@ -8,6 +8,17 @@ import org.openstates.api.OpenStatesException;
 import org.openstates.data.Bill;
 import org.openstates.data.Bills;
 
+/**
+ * The BillClass accesses the <a href="http://sunlightlabs.github.io/openstates-api/bills.html">Bills</a> methods.
+ * 
+ * <pre>
+ * There are two methods available for bill data:
+ * Method	 Description
+ * Bill Search	 Search bills by (almost) any of their attributes, or full text.
+ * Bill Detail	 Get full detail for bill, including any actions, votes, etc. 
+ * </pre>
+ *
+ */
 public class BillClass extends ClassesBase {
 
 	/**
@@ -52,7 +63,7 @@ public class BillClass extends ClassesBase {
 		String page, 
 		String per_page
 	) throws OpenStatesException {
-		OpenStates.suspendCaching();
+		OpenStates.suspendCache();
 		Bills bills = api.query( 
 			new MethodMap("bills"), 
 			new ArgMap(
@@ -98,7 +109,7 @@ public class BillClass extends ClassesBase {
 		String page, 
 		String per_page
 	) throws OpenStatesException {
-		OpenStates.suspendCaching();
+		OpenStates.suspendCache();
 		Bills bills = api.query( 
 			new MethodMap("bills"), 
 			new ArgMap(
@@ -137,7 +148,7 @@ public class BillClass extends ClassesBase {
 		String page, 
 		String per_page
 	) throws OpenStatesException {
-		OpenStates.suspendCaching();
+		OpenStates.suspendCache();
 		Bills bills = api.query( 
 			new MethodMap("bills"), 
 			new ArgMap(
@@ -176,7 +187,7 @@ public class BillClass extends ClassesBase {
 		String page, 
 		String per_page
 	) throws OpenStatesException {
-		OpenStates.suspendCaching();
+		OpenStates.suspendCache();
 		Bills bills = api.query( 
 			new MethodMap("bills"), 
 			new ArgMap(
@@ -226,7 +237,7 @@ public class BillClass extends ClassesBase {
 		String page, 
 		String per_page
 	) throws OpenStatesException {
-		OpenStates.suspendCaching();
+		OpenStates.suspendCache();
 		Bills bills = api.query( 
 			new MethodMap("bills"), 
 			new ArgMap(
@@ -275,7 +286,7 @@ public class BillClass extends ClassesBase {
 		String page, 
 		String per_page
 	) throws OpenStatesException {
-		OpenStates.suspendCaching();
+		OpenStates.suspendCache();
 		Bills bills = api.query( 
 			new MethodMap("bills"), 
 			new ArgMap(
@@ -318,7 +329,7 @@ public class BillClass extends ClassesBase {
 	 * @param type - Only bills of a given type (e.g. 'bill', 'resolution', etc.)
 	 * 
 	 * Additional Parameters
-	 * @Param sort - Sort-order of results, defaults to 'last', options are:
+	 * @param sort - Sort-order of results, defaults to 'last', options are:
 	 *        'first', 'last', 'signed', 'passed_lower', 'passed_upper', 'updated_at', 'created_at'.
 	 * 
 	 * See the above action_dates, created_at, and updated_at documentation for the meaning of these dates.
@@ -345,7 +356,7 @@ public class BillClass extends ClassesBase {
 		String page, 
 		String per_page
 	) throws OpenStatesException {
-		OpenStates.suspendCaching();
+		OpenStates.suspendCache();
 		Bills bills = api.query( 
 			new MethodMap("bills"), 
 			new ArgMap(

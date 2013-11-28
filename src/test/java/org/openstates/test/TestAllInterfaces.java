@@ -1,5 +1,9 @@
-package examples;
+package org.openstates.test;
 
+
+import static org.junit.Assert.*;
+
+import org.junit.Test;
 import org.openstates.classes.BillClass;
 import org.openstates.classes.CommitteeClass;
 import org.openstates.classes.DistrictClass;
@@ -17,37 +21,18 @@ import org.openstates.data.Legislator;
 import org.openstates.data.Legislators;
 import org.openstates.data.Metadata;
 import org.openstates.data.MetadataOverview;
+import org.openstates.testapi.TestOpenStatesBase;
 
 /**
- * 
- * This program is a demonstrates most of the API.
- * 
- * <pre>
- * This program is a demonstrates most of the API.
- * It requires a ResourceBundle named OpenStates. This means a file
- * named OpenStates.properties must be found in your class path, such
- * as your resources directory. This OpenStates client reads two 
- * keys from the resource bundle, one of which is mandatory.
- * These are in the form of key=value, one on each line.
- * The keys are:
- * 
- * apikey    (Mandatory) get from OpenStates.org
- * cache     (Optional) such as c:/tmp/OpenStatesCache
- * 
- * For Example:
- * apikey=123easyasabcbabyyouandme
- * cache=c:/tmp/openstates
- * 
- * It makes most of the calls available in one form or another.
- * 
- * </pre>
+ * The goal here is just to make (most) every possible call.
  *
  */
-public class AllThingsTexas {
+public class TestAllInterfaces extends TestOpenStatesBase {
 
-	public static void main(String... args) throws Exception {
+	@Test
+	public void test() throws Exception {
 		// create a class to query
-		MetadataClass metadataClass = new MetadataClass();
+		MetadataClass metadataClass = new MetadataClass(this);
 
 		// if you want to turn caching off, uncomment this line
 		// OpenStates.checkCacheFirst(false);
@@ -63,73 +48,73 @@ public class AllThingsTexas {
 				break;
 			}
 		}
-		System.out.println("The abbreviation for Timezone for " + metadata.abbreviation + " is " + metadata.capitol_timezone);
+		assertEquals( metadata.abbreviation, "tx" );
+		assertEquals( metadata.capitol_timezone, "America/Chicago" );
 		
 		// LegislatorsClass
-		LegislatorClass legislatorClass = new LegislatorClass();
+		LegislatorClass legislatorClass = new LegislatorClass(this);
 				
 		// legislators by state
 		Legislators legislators = legislatorClass.searchByState(metadata.abbreviation);
-		System.out.println("" + legislators.size() + " legislators found.");
+		assertEquals( legislators.size(), 181 );
 		
 		// get active legislators for state
 		legislators = legislatorClass.search(metadata.abbreviation, null, null, "upper", null, null, null, null);
-		System.out.println("" + legislators.size() + " legislators found in upper chamber.");
+		assertEquals( legislators.size(), 31 );
 
 		// active legislators by state
 		legislators = legislatorClass.searchByStateActive(metadata.abbreviation, true);
-		System.out.println("" + legislators.size() + " active legislators found.");
+		assertEquals( legislators.size(), 181 );
 
 		// a specific legislator
 		Legislator legislator = legislatorClass.detail(legislators.get(0).id);
-		System.out.println("First Legislator is " + legislator.full_name );
+		assertEquals( legislator.full_name, "Paul Workman" );
 		
 		// committee class
-		CommitteeClass committeeClass = new CommitteeClass();
+		CommitteeClass committeeClass = new CommitteeClass(this);
 		
 		// get committees for upper chamber for state
 		Committees committees = committeeClass.search(metadata.abbreviation, "upper", null, null);
-		System.out.println("" + committees.size() + " committees found in upper chamber.");
+		assertEquals( committees.size(), 24 );
 		
 		// get committees for for state
 		committees = committeeClass.searchByState(metadata.abbreviation);
-		System.out.println("" + committees.size() + " committees found.");
+		assertEquals( committees.size(), 74 );
 
 		// specific committee
 		Committee committee = committeeClass.detail(committees.get(0).id);
-		System.out.println("First committee called " + committee.committee );
+		assertEquals( committee.committee, "Appropriations - S/C on Articles VI, VII, & VIII" );
 		
 		// District class
-		DistrictClass districtClass = new DistrictClass();
+		DistrictClass districtClass = new DistrictClass(this);
 		
 		// get committees for upper chamber for state
 		Districts districts = districtClass.search(metadata.abbreviation, "upper");
-		System.out.println("" + districts.size() + " districts found in upper chamber.");
+		assertEquals( districts.size(), 31 );
 		
 		// get committees for for state
 		districts = districtClass.searchByState(metadata.abbreviation);
-		System.out.println("" + districts.size() + " districts found.");
+		assertEquals( districts.size(), 181 );
 		
 		// District class
-		EventClass eventClass = new EventClass();
+		EventClass eventClass = new EventClass(this);
 		
 		// get committees for for state
 		Events events = eventClass.searchByState(metadata.abbreviation);
-		System.out.println("" + events.size() + " events found.");
+		assertEquals( events.size(), 4 );
 		
 		// specific event
 		Event event = eventClass.detail(events.get(0).id);
-		System.out.println("First event is " + event.description );
+		assertEquals( event.description, "Defense & Veterans' Affairs" );
 		
 		//Bill class
-		BillClass billClass = new BillClass();
+		BillClass billClass = new BillClass(this);
 		Bills bills = billClass.searchByQueryWindow(metadata.abbreviation, "abortion", "term", null, null);
-		System.out.println("" + bills.size() + " bills found.");
+		assertEquals( bills.size(), 69 );
 
 		// bill detail
 		Bill bill = billClass.detail(bills.get(0).state, bills.get(0).session, bills.get(0).bill_id);
-		System.out.println("First bill title: " + bill.title);
+		assertEquals( bill.title, "Relating to a pregnant woman's completion of a resource awareness session before performance or inducement of an abortion; providing penalties." );
 		
 	}
-
 }

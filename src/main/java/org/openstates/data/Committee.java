@@ -3,6 +3,29 @@ package org.openstates.data;
 import java.util.Date;
 import java.util.List;
 
+/**
+ * Holds Committee specific details.
+ *
+ * <pre>
+ * id, 
+ * state, 
+ * committee, 
+ * subcommittee, 
+ * chamber, 
+ * type, 
+ * parent_id, 
+ * country, 
+ * created_at, 
+ * updated_at, 
+ * level, 
+ * votesmart_id, 
+ * contact_info, 
+ * aide, 
+ * comm_type, 
+ * members, 
+ * sources. 
+ * </pre>
+ */
 public class Committee {
 	public String id;
 	public String state;

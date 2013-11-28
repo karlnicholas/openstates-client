@@ -7,9 +7,14 @@ import org.openstates.api.OpenStatesAPI;
 import org.openstates.api.OpenStatesException;
 
 /**
+ * Base class for all other classes.
+ * 
  * <pre>
  * Base class for all other classes. 
- * The user has no reason to use this class.
+ * 
+ * The user has no reason to use this class directly. It
+ * is used as the base class for all of the other 
+ * 'Classes' classes.
  * </pre>
  */
 public class ClassesBase {
