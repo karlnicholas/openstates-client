@@ -46,7 +46,7 @@ import java.util.Map;
  * </pre>
  *
  */
-public class Legislator {
+public class Legislator extends DataBase {
 	public String id;
 	public String leg_id;
 	public String country;
@@ -83,7 +83,7 @@ public class Legislator {
 	public List<String> all_ids;
 	public String occupation;
 	
-	public static class Office {
+	public static class Office extends DataBase {
 		public String type;
 		public String name;
 		public String address;
@@ -92,7 +92,7 @@ public class Legislator {
 		public String email;
 	}
 
-	public static class Role {
+	public static class Role extends DataBase {
 		public String chamber;
 		public String state;
 		public String country;
@@ -110,7 +110,7 @@ public class Legislator {
 		public List<String> other_parties;
 	}
 	
-	public static class Source {
+	public static class Source extends DataBase {
 		public String url;
 		public Date retrieved;
 	}

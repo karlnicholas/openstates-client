@@ -1,5 +1,7 @@
 package examples;
 
+import java.util.ArrayList;
+
 import org.openstates.classes.BillClass;
 import org.openstates.classes.CommitteeClass;
 import org.openstates.classes.DistrictClass;
@@ -10,6 +12,7 @@ import org.openstates.data.Bill;
 import org.openstates.data.Bills;
 import org.openstates.data.Committee;
 import org.openstates.data.Committees;
+import org.openstates.data.DataBase;
 import org.openstates.data.Districts;
 import org.openstates.data.Event;
 import org.openstates.data.Events;
@@ -70,18 +73,22 @@ public class AllThingsTexas {
 				
 		// legislators by state
 		Legislators legislators = legislatorClass.searchByState(metadata.abbreviation);
+		checkExtras(legislators);
 		System.out.println("" + legislators.size() + " legislators found.");
 		
 		// get active legislators for state
 		legislators = legislatorClass.search(metadata.abbreviation, null, null, "upper", null, null, null, null);
+		checkExtras(legislators);
 		System.out.println("" + legislators.size() + " legislators found in upper chamber.");
 
 		// active legislators by state
 		legislators = legislatorClass.searchByStateActive(metadata.abbreviation, true);
+		checkExtras(legislators);
 		System.out.println("" + legislators.size() + " active legislators found.");
 
 		// a specific legislator
 		Legislator legislator = legislatorClass.detail(legislators.get(0).id);
+		checkExtras(legislator);
 		System.out.println("First Legislator is " + legislator.full_name );
 		
 		// committee class
@@ -89,14 +96,17 @@ public class AllThingsTexas {
 		
 		// get committees for upper chamber for state
 		Committees committees = committeeClass.search(metadata.abbreviation, "upper", null, null);
+		checkExtras(committees);
 		System.out.println("" + committees.size() + " committees found in upper chamber.");
 		
 		// get committees for for state
 		committees = committeeClass.searchByState(metadata.abbreviation);
+		checkExtras(committees);
 		System.out.println("" + committees.size() + " committees found.");
 
 		// specific committee
 		Committee committee = committeeClass.detail(committees.get(0).id);
+		checkExtras(committee);
 		System.out.println("First committee called " + committee.committee );
 		
 		// District class
@@ -104,10 +114,12 @@ public class AllThingsTexas {
 		
 		// get committees for upper chamber for state
 		Districts districts = districtClass.search(metadata.abbreviation, "upper");
+		checkExtras(districts);
 		System.out.println("" + districts.size() + " districts found in upper chamber.");
 		
 		// get committees for for state
 		districts = districtClass.searchByState(metadata.abbreviation);
+		checkExtras(districts);
 		System.out.println("" + districts.size() + " districts found.");
 		
 		// District class
@@ -115,21 +127,40 @@ public class AllThingsTexas {
 		
 		// get committees for for state
 		Events events = eventClass.searchByState(metadata.abbreviation);
+		checkExtras(events);
 		System.out.println("" + events.size() + " events found.");
 		
 		// specific event
 		Event event = eventClass.detail(events.get(0).id);
+		checkExtras(event);
 		System.out.println("First event is " + event.description );
 		
 		//Bill class
 		BillClass billClass = new BillClass();
 		Bills bills = billClass.searchByQueryWindow(metadata.abbreviation, "abortion", "term", null, null);
+		checkExtras(bills);
 		System.out.println("" + bills.size() + " bills found.");
 
 		// bill detail
 		Bill bill = billClass.detail(bills.get(0).state, bills.get(0).session, bills.get(0).bill_id);
+		checkExtras(bill);
 		System.out.println("First bill title: " + bill.title);
 		
+	}
+	
+	private static void checkExtras(Object o) {
+		if ( o instanceof ArrayList ) {
+			@SuppressWarnings("unchecked")
+			ArrayList<DataBase> list = (ArrayList<DataBase>)o;
+			for ( DataBase base: list ) {
+				if ( base.pluses != null ) System.out.println(base.pluses);
+				if ( base.newFields != null ) System.out.println(base.newFields);
+			}
+		} else if ( o instanceof DataBase ) {
+			DataBase base = (DataBase)o;
+			if ( base.pluses != null ) System.out.println(base.pluses);
+			if ( base.newFields != null ) System.out.println(base.newFields);
+		}
 	}
 
 }

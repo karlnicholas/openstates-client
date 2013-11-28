@@ -33,7 +33,7 @@ import java.util.Map;
  * </pre>
  *
  */
-public class Metadata {
+public class Metadata extends DataBase {
 	public String abbreviation;
 	public String capitol_timezone;
 	public List<Maps> capitol_maps;
@@ -57,16 +57,16 @@ public class Metadata {
 	public String upper_chamber_title;
 	public String upper_chamber_term;
 
-	public static class Maps {
+	public static class Maps extends DataBase {
 		public String url;
 		public String name;
 	}
-	public static class Chamber {
+	public static class Chamber extends DataBase {
 		public String name;
 		public String title;
 	}
 
-	public static class Session {
+	public static class Session extends DataBase {
 		public String type;
 		public String display_name;
 		public Date start_date;
@@ -75,7 +75,7 @@ public class Metadata {
 		public String start_year;
 	}
 
-	public static class Term {
+	public static class Term extends DataBase {
 		public String type;
 		public String end_year;
 		public String start_year;

@@ -6,7 +6,7 @@
 <p>The <a href="http://sunlightlabs.github.io/openstates-api/">OpenStates API</a> site has 
 additional information and terms of use.</p>
 
-<p>The typical user will typically use the classes in the org.openstates.classes package.</p>
+<p>The user will typically use the classes in the org.openstates.classes package.</p>
 
 <p>Java version 1.6 at a minimum is required. The json client library org.fasterxml.jackson-databind.jar, version 2.2.3 was used 
 and is required. An earlier or later version may be used but hasn't been tested.</p>
@@ -14,12 +14,12 @@ and is required. An earlier or later version may be used but hasn't been tested.
 <p>It requires a ResourceBundle named OpenStates. This means a file
 named openstates.properties must be found in your class path, such
 as your resources directory. This OpenStates client reads two 
-keys from the resource bundle, two of which are mandatory.
+keys from the resource bundle, one of which is mandatory.
 These are in the form of key=value, one on each line.
 The keys are:<br/><br/>
 
-apikey		(Mandatory) get and APIKEY from OpenStates.org<br/>
-cache		(Optional) such as c:/tmp/OpenStatesCache<br/>
+apikey		(Mandatory) The APIKEY from OpenStates.org<br/>
+cache		(Optional) Such as c:/tmp/OpenStatesCache<br/>
 </p>
 
 <pre>For Example:
@@ -27,9 +27,9 @@ apikey=123easyasabcbabyyouandme
 cache=c:/tmp/openstates
 </pre>
 <p>
- The queries will be cached and all subsequent calls will return 
- the same information. If you want to disable the cache checking, 
- then call OpenStates.checkCache(false); or OpenStates.checkCache(true);
+ If caching is enabled, the queries will be cached and all subsequent calls will 
+ return the same information. If you want to disable the cache checking, 
+ then call OpenStates.setCache(false) to turn it off and OpenStates.setCache(true)
  to turn it back on.
 </p>
 </body>

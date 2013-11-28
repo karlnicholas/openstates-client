@@ -15,11 +15,15 @@ import java.net.URLEncoder;
 import java.nio.charset.Charset;
 import java.text.SimpleDateFormat;
 import java.util.ResourceBundle;
+import java.util.TreeMap;
 import java.util.logging.Logger;
+
+import org.openstates.data.DataBase;
 
 import com.fasterxml.jackson.core.JsonParseException;
 import com.fasterxml.jackson.core.JsonParser;
 import com.fasterxml.jackson.core.JsonProcessingException;
+import com.fasterxml.jackson.core.TreeNode;
 import com.fasterxml.jackson.databind.DeserializationContext;
 import com.fasterxml.jackson.databind.JsonDeserializer;
 import com.fasterxml.jackson.databind.JsonMappingException;
@@ -53,6 +57,8 @@ public class OpenStates implements OpenStatesAPI {
     private static boolean suspendCache;
 	private static ObjectMapper mapper;
 	public static SimpleDateFormat dateFormat;
+//	public static TreeMap<String, TreeNode> pluses;
+//	public static TreeMap<String, TreeNode> newFields;
 
     /**
      * Initialize the API. Called instead of a constructor.
@@ -92,10 +98,24 @@ public class OpenStates implements OpenStatesAPI {
 	        String propertyName) throws IOException, JsonProcessingException 
 	    {
 			if ( propertyName.charAt(0) == '+' ) {
-				ctxt.getParser().skipChildren();
-				return true;
+				if ( beanOrClass instanceof DataBase ) {
+					DataBase base = (DataBase)beanOrClass; 
+					if ( base.pluses == null ) base.pluses = new TreeMap<String, TreeNode>();
+					base.pluses.put(propertyName, jp.readValueAsTree());
+				} else {
+					throw new RuntimeException("beanOrClass type unknown");
+				}
+			} else {
+				if ( beanOrClass instanceof DataBase ) {
+					DataBase base = (DataBase)beanOrClass; 
+					if ( base.newFields == null ) base.newFields = new TreeMap<String, TreeNode>();
+					base.newFields.put(propertyName, jp.readValueAsTree());
+				} else {
+					throw new RuntimeException("beanOrClass type unknown");
+				}
 			}
-			else return false;
+//			ctxt.getParser().skipChildren();
+			return true;
 	    }
 	}
 	
@@ -139,7 +159,7 @@ public class OpenStates implements OpenStatesAPI {
 	 *  is not for public consumption.
 	 *   
 	 */
-	public <T> T query(MethodMap methodMap, ArgMap argMap, Class<T> responseType) throws OpenStatesException {
+	public <T> T query(MethodMap methodMap, ArgMap argMap, Class<T> responseType ) throws OpenStatesException {
 		BufferedReader reader = null;
 		HttpURLConnection conn = null;
 		String charSet = "utf-8";

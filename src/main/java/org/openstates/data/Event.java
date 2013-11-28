@@ -25,7 +25,7 @@ import java.util.List;
  * </pre>
  *
  */
-public final class Event {
+public final class Event extends DataBase {
 	public String id;
 	public Date created_at;
 	public Date updated_at;
@@ -42,7 +42,7 @@ public final class Event {
 	public List<String> related_bills;
 	public String timezone;
 
-	public static class Participant {
+	public static class Participant extends DataBase {
 		public String id;
 		public String type;
 		public String participant_type;
@@ -50,7 +50,7 @@ public final class Event {
 		public String chamber;
 	}
 	
-	public static class Source {
+	public static class Source extends DataBase {
 		public String url;
 	}
 }

@@ -24,7 +24,7 @@ import java.util.Map;
 public class MetadataOverview extends ArrayList<MetadataOverview.Data> {
 	private static final long serialVersionUID = 3508588106112659421L;
 
-	public static class Data {
+	public static class Data extends DataBase {
 		public String lower_chamber_name;
 		public String lower_chamber_title;
 		public String lower_chamber_term;
@@ -36,7 +36,7 @@ public class MetadataOverview extends ArrayList<MetadataOverview.Data> {
 		public List<String> feature_flags;
 		public Map<String, Ch> chambers;
 		
-		public static class Ch {
+		public static class Ch extends DataBase {
 			public String name;
 			public String title;
 			public String term;

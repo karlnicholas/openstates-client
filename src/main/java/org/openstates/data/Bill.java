@@ -32,7 +32,7 @@ import java.util.List;
  * summary.
  * </pre>
  */
-public class Bill {	
+public class Bill extends DataBase {	
 
 	public String session;
 	public String chamber;
@@ -60,7 +60,7 @@ public class Bill {
 	public String summary;
 	
 
-	public static class ActionDate {
+	public static class ActionDate extends DataBase {
 		public Date passed_upper;
 		public Date passed_lower;
 		public Date first;
@@ -68,33 +68,33 @@ public class Bill {
 		public Date signed;
 	}
 
-	public static class Companion {
+	public static class Companion extends DataBase {
 		public String chamber;
 		public String session;
 		public String internal_id;
 		public String bill_id;
 	}
 
-	public static class Source {
+	public static class Source extends DataBase {
 		public String url;
 		public Date retrieved;
 	}
 
-	public static class Version {
+	public static class Version extends DataBase {
 		public String name;
 		public String url;
 		public String title;
 		public String mimetype;
 		public String doc_id;
 	}
-	public static class Document {
+	public static class Document extends DataBase {
 		public String name;
 		public String url;
 		public String mimetype;
 		public String doc_id;
 	}
 
-	public static class Sponsor {
+	public static class Sponsor extends DataBase {
 		public String type;
 		public String name;
 		public String chamber;
@@ -102,7 +102,7 @@ public class Bill {
 		public String committee_id;
 		public String official_type;
 	}
-	public static class Action {
+	public static class Action extends DataBase {
 		public String action;
 		public String actor;
 		public Date date;
@@ -111,13 +111,13 @@ public class Bill {
 		public String committee;
 		public List<String> related_votes;
 
-		public static class RelatedEntity {
+		public static class RelatedEntity extends DataBase {
 			public String id;
 			public String type;
 			public String name;
 		}
 	}
-	public static class Vote {
+	public static class Vote extends DataBase {
 		public String chamber;
 		public String committee;
 		public Date date;
@@ -141,12 +141,12 @@ public class Bill {
 		public String record;
 		public String method;
 
-		public static class Leg {
+		public static class Leg extends DataBase {
 			public String leg_id;
 			public String name;
 		}
 		
-		public static class Source {
+		public static class Source extends DataBase {
 			public String url;
 			public Date retrieved;
 		}

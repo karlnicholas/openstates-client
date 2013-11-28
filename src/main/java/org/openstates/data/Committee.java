@@ -26,7 +26,7 @@ import java.util.List;
  * sources. 
  * </pre>
  */
-public class Committee {
+public class Committee extends DataBase {
 	public String id;
 	public String state;
 	public String committee;
@@ -45,13 +45,13 @@ public class Committee {
 	public List<Member> members;
 	public List<Source> sources;
 
-	public static class Member {
+	public static class Member extends DataBase {
 		public String role;
 		public String name;
 		public String leg_id;
 	}
 	
-	public static class Source {
+	public static class Source extends DataBase {
 		public String url;
 	}
 }

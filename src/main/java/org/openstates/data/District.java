@@ -22,7 +22,7 @@ public class District extends Districts.Dist {
 	public Region region;
 	public Float[][][][] shape;
 	
-	public static class Region {
+	public static class Region extends DataBase {
 		public String lon_delta;
 		public String center_lon;
 		public String lat_delta;

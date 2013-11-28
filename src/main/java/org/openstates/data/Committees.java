@@ -9,7 +9,7 @@ import java.util.Date;
  */
 public class Committees extends ArrayList<Committees.Cmte> {
 	private static final long serialVersionUID = -3782946454018623648L;
-	public static class Cmte {
+	public static class Cmte extends DataBase {
 		public String country;
 		public String level;
 		public String id; 
