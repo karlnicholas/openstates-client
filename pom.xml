@@ -78,7 +78,7 @@
 				<configuration>
 					<serverId>sonatype-nexus-staging</serverId>
 					<nexusUrl>https://oss.sonatype.org/</nexusUrl>
-					<stagingProfileId>1a29f7bd91750d</stagingProfileId>
+					<stagingProfileId>1d0492dcad84b9</stagingProfileId>
 				</configuration>
 			</plugin>
 			<plugin>
