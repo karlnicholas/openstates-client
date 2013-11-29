@@ -5,6 +5,7 @@ import java.util.List;
 
 /**
  * Holds all of the detail of a specific bill.
+ * Implements Comparable.
  * 
  * <pre>
  * chamber, 
@@ -32,7 +33,7 @@ import java.util.List;
  * summary.
  * </pre>
  */
-public class Bill extends DataBase {	
+public class Bill extends DataBase implements Comparable<Bill>{	
 
 	public String session;
 	public String chamber;
@@ -150,5 +151,10 @@ public class Bill extends DataBase {
 			public String url;
 			public Date retrieved;
 		}
+	}
+
+	@Override
+	public int compareTo(Bill o) {
+		return id.compareTo(o.id); 
 	}
 }

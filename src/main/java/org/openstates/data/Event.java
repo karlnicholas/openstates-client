@@ -5,6 +5,7 @@ import java.util.List;
 
 /**
  * Holds Event details.
+ * Implements Comparable.
  * 
  * <pre>
  * id, 
@@ -25,7 +26,7 @@ import java.util.List;
  * </pre>
  *
  */
-public final class Event extends DataBase {
+public final class Event extends DataBase implements Comparable<Event> {
 	public String id;
 	public Date created_at;
 	public Date updated_at;
@@ -52,5 +53,10 @@ public final class Event extends DataBase {
 	
 	public static class Source extends DataBase {
 		public String url;
+	}
+
+	@Override
+	public int compareTo(Event o) {
+		return id.compareTo(o.id);
 	}
 }

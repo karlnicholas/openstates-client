@@ -6,6 +6,7 @@ import java.util.Map;
 
 /**
  * Holds Metadata details.
+ * Implements Comparable.
  * 
  * <pre>
  * abbreviation, 
@@ -33,7 +34,7 @@ import java.util.Map;
  * </pre>
  *
  */
-public class Metadata extends DataBase {
+public class Metadata extends DataBase implements Comparable<Metadata> {
 	public String abbreviation;
 	public String capitol_timezone;
 	public List<Maps> capitol_maps;
@@ -82,5 +83,10 @@ public class Metadata extends DataBase {
 		public Date start_date;
 		public String name;
 		public List<String> sessions;
+	}
+
+	@Override
+	public int compareTo(Metadata o) {
+		return id.compareTo(o.id);
 	}
 }

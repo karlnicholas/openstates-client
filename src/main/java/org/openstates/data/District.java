@@ -2,6 +2,7 @@ package org.openstates.data;
 
 /**
  * Holds District details.
+ * Implements Comparable.
  * 
  * <pre>
  * abbr, 
@@ -17,7 +18,7 @@ package org.openstates.data;
  * </pre> 
  *
  */
-public class District extends Districts.Dist {
+public class District extends Districts.Dist implements Comparable<District> {
 	public Float[][] bbox;
 	public Region region;
 	public Float[][][][] shape;
@@ -27,5 +28,10 @@ public class District extends Districts.Dist {
 		public String center_lon;
 		public String lat_delta;
 		public String center_lat;
+	}
+
+	@Override
+	public int compareTo(District o) {
+		return id.compareTo(o.id);
 	}
 }

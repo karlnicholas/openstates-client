@@ -5,6 +5,7 @@ import java.util.List;
 
 /**
  * Holds Committee specific details.
+ * Implements Comparable.
  *
  * <pre>
  * id, 
@@ -26,7 +27,7 @@ import java.util.List;
  * sources. 
  * </pre>
  */
-public class Committee extends DataBase {
+public class Committee extends DataBase implements Comparable<Committee> {
 	public String id;
 	public String state;
 	public String committee;
@@ -53,5 +54,10 @@ public class Committee extends DataBase {
 	
 	public static class Source extends DataBase {
 		public String url;
+	}
+
+	@Override
+	public int compareTo(Committee o) {
+		return id.compareTo(o.id);
 	}
 }

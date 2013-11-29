@@ -6,6 +6,7 @@ import java.util.Map;
 
 /**
  * Holds Legislator details.
+ * Implements Comparable.
  * 
  * <pre>
  * id, 
@@ -46,7 +47,7 @@ import java.util.Map;
  * </pre>
  *
  */
-public class Legislator extends DataBase {
+public class Legislator extends DataBase implements Comparable<Legislator> {
 	public String id;
 	public String leg_id;
 	public String country;
@@ -113,6 +114,11 @@ public class Legislator extends DataBase {
 	public static class Source extends DataBase {
 		public String url;
 		public Date retrieved;
+	}
+
+	@Override
+	public int compareTo(Legislator o) {
+		return id.compareTo(o.id);
 	}
 
 }
