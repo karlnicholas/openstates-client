@@ -11,7 +11,6 @@ import java.io.OutputStreamWriter;
 import java.net.HttpURLConnection;
 import java.net.URI;
 import java.net.URISyntaxException;
-import java.net.URLEncoder;
 import java.nio.charset.Charset;
 import java.text.SimpleDateFormat;
 import java.util.ResourceBundle;
@@ -67,9 +66,9 @@ public class OpenStates implements OpenStatesAPI {
      */
 	public OpenStates(ResourceBundle bundle) throws OpenStatesException {
 		// API not needed for testing
-		if ( !bundle.containsKey(apikeyKey)) throw new OpenStatesException("No apikey found in openstates.properties");
+		if ( !bundle.containsKey(apikeyKey)) throw new OpenStatesException(-1, "No apikey found in openstates.properties", null, null, null);
 		apiKey = bundle.getString(apikeyKey);
-		if ( apiKey == null ) throw new OpenStatesException("apikey not set in openstates.properties");
+		if ( apiKey == null ) throw new OpenStatesException(-1, "apikey not set in openstates.properties", null, null, null);
 		if ( bundle.containsKey(cacheKey)) {
 			cache = bundle.getString(cacheKey);
 			if ( cache.lastIndexOf('/') != (cache.length()-1)) cache = cache+"/";
@@ -170,24 +169,31 @@ public class OpenStates implements OpenStatesAPI {
 				long fileLength = file.length(); 
 				logger.fine("Length of File in cache:" + fileLength + ": " + file.getName());
 				if ( fileLength == 0L ) {
-					OpenStates.cacheFileFromAPI(methodMap, argMap, file);
+					OpenStates.cacheFileFromAPI(methodMap, argMap, file, responseType);
 				}
 				reader = new BufferedReader(new InputStreamReader(new FileInputStream(file), charSet));
 			} else {
 				conn = OpenStates.getConnectionFromAPI(methodMap, argMap);
 				charSet = getCharset(conn);
+			    // better check it first
+				int rcode = conn.getResponseCode();
+			    if ( rcode / 100 != 2) {
+			    	String msg = conn.getResponseMessage();
+			    	conn.disconnect();
+			    	throw new OpenStatesException(rcode, msg, methodMap, argMap, responseType);
+			    }
 				reader = new BufferedReader(new InputStreamReader(conn.getInputStream(), charSet));
 			}
 			
         	return mapper.readValue( reader, responseType );
 		} catch (JsonParseException e) {
-			throw new OpenStatesException(e);
+			throw new OpenStatesException(e, methodMap, argMap, responseType);
 		} catch (JsonMappingException e) {
-			throw new OpenStatesException(e);
+			throw new OpenStatesException(e, methodMap, argMap, responseType);
 		} catch (URISyntaxException e) {
-			throw new OpenStatesException(e);
+			throw new OpenStatesException(e, methodMap, argMap, responseType);
 		} catch (IOException e) {
-			throw new OpenStatesException(e);
+			throw new OpenStatesException(e, methodMap, argMap, responseType);
 		} finally {
 			suspendCache = false;
 			if ( conn != null ) conn.disconnect();
@@ -195,7 +201,7 @@ public class OpenStates implements OpenStatesAPI {
 				try {
 					reader.close();
 				} catch (IOException e) {
-					throw new OpenStatesException(e);
+					throw new OpenStatesException(e, methodMap, argMap, responseType);
 				}
 			}
 		}
@@ -236,7 +242,7 @@ public class OpenStates implements OpenStatesAPI {
 		return new File(filename.toString());
 	}
 	
-	private static void cacheFileFromAPI(MethodMap methodMap, ArgMap argMap, File file) throws URISyntaxException, IOException, OpenStatesException {
+	private static void cacheFileFromAPI(MethodMap methodMap, ArgMap argMap, File file, Class<?> responseType) throws URISyntaxException, IOException, OpenStatesException {
 		BufferedReader breader = null;
 		BufferedWriter bwriter = null;
 		HttpURLConnection conn = null;
@@ -244,6 +250,13 @@ public class OpenStates implements OpenStatesAPI {
 		    char[] buffer = new char[262144];
 			conn = getConnectionFromAPI(methodMap, argMap);
 			String charSet = getCharset(conn);
+		    // better check it first
+			int rcode = conn.getResponseCode();
+		    if ( rcode / 100 != 2) {
+		    	String msg = conn.getResponseMessage();
+		    	conn.disconnect();
+		    	throw new OpenStatesException(rcode, msg, methodMap, argMap, responseType);
+		    }
 			breader = new BufferedReader(new InputStreamReader( conn.getInputStream(), charSet ) );
 			bwriter = new BufferedWriter( new OutputStreamWriter( new FileOutputStream(file), Charset.forName("utf-8")) );
 			int read;
@@ -279,7 +292,7 @@ public class OpenStates implements OpenStatesAPI {
 				terms.append( '&' );
 				terms.append( key );
 				terms.append('=' );
-				terms.append( URLEncoder.encode(value, "utf-8" ) );
+				terms.append( value );	// URL encoding is done by the URI constructor
 			}
 		}
 			
@@ -302,13 +315,7 @@ public class OpenStates implements OpenStatesAPI {
 	    return con;
 	}
 	
-	private static String getCharset(HttpURLConnection con) throws OpenStatesException, IOException {
-	    // better check it first
-	    if (con.getResponseCode() / 100 != 2) {
-	    	String msg = con.getResponseMessage();
-	    	con.disconnect();
-	    	throw new OpenStatesException(msg);
-	    }
+	private static String getCharset(HttpURLConnection con) throws IOException {
 	    String contentType = con.getHeaderField("Content-Type");
 	    String charset = null;
 	    for (String param : contentType.replace(" ", "").split(";")) {

@@ -57,7 +57,7 @@ public class TestOpenStates {
 			// arbitrary large value
 			buffer = new char[ 262144 ];
 		} catch (IOException e) {
-			throw new OpenStatesException(e);
+			throw new OpenStatesException(e, null, null, null);
 		}
 	}
 
@@ -134,7 +134,7 @@ public class TestOpenStates {
 			
         	return mapper.readValue(reader, responseType);
 		} catch (IOException e) {
-			throw new OpenStatesException(e);
+			throw new OpenStatesException(e, methodMap, argMap, responseType);
 		}
 	}
 	
