@@ -40,7 +40,7 @@ public final class Event extends DataBase implements Comparable<Event> {
 	public List<Participant> participants;
 	public List<Source> sources;
 	public List<String> documents;
-	public List<String> related_bills;
+	public List<RelatedBill> related_bills;
 	public String timezone;
 
 	public static class Participant extends DataBase {
@@ -53,6 +53,13 @@ public final class Event extends DataBase implements Comparable<Event> {
 	
 	public static class Source extends DataBase {
 		public String url;
+	}
+	
+	public static class RelatedBill extends DataBase {
+		public String type;
+		public String description;
+		public String bill_id;
+		public String id;
 	}
 
 	@Override
