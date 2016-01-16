@@ -37,7 +37,7 @@ public class TestOpenStates {
 	private ObjectMapper mapper;
 	SimpleDateFormat dateFormat;
 
-	public TestOpenStates(ResourceBundle bundle) throws OpenStatesException {
+	public TestOpenStates() throws OpenStatesException {
 		try {
 			mapEntries = new TreeMap<String, ZipEntry>();
 

@@ -21,7 +21,7 @@ public class TestOpenStatesBase implements OpenStatesAPI {
 	@BeforeClass
 	public static void setup() {
 		try {
-			api = new TestOpenStates(ResourceBundle.getBundle("openstates"));
+			api = new TestOpenStates();
 		} catch (OpenStatesException e) {
 			throw new RuntimeException(e);
 		}
